@@ -59,7 +59,7 @@ Database system
 
 Database update system
 - Károly Négyesi 'chx' http://drupal.org/user/9446
-- Ashok Modi 'btmash' http://drupal.org/user/60422
+- Ashok Modi 'BTMash' http://drupal.org/user/60422
 
 Entity system
 - Wolfgang Ziegler 'fago' http://drupal.org/user/16747
@@ -87,6 +87,7 @@ Install system
 JavaScript
 - Théodore Biadala 'nod_' http://drupal.org/user/598310
 - Steve De Jonghe 'seutje' http://drupal.org/user/264148
+- Jesse Renée Beach 'jessebeach' http://drupal.org/user/748566
 
 Language system
 - Francesco Placella 'plach' http://drupal.org/user/183211
@@ -139,7 +140,7 @@ Documentation
 - Jennifer Hodgdon 'jhodgdon' http://drupal.org/user/155601
 
 Security
-- Heine Deelstra 'Heine' http://drupal.org/user/17943
+- Greg Knaddison 'greggles' http://drupal.org/user/36762
 
 Translations
 - Gerhard Killesreiter 'killes' http://drupal.org/user/83
@@ -220,7 +221,6 @@ Node module
 
 OpenID module
 - Vojtech Kusy 'wojtha' http://drupal.org/user/56154
-- Heine Deelstra 'Heine' http://drupal.org/user/17943
 - Christian Schmidt 'c960657' http://drupal.org/user/216078
 - Damien Tournoud 'DamZ' http://drupal.org/user/22211
 

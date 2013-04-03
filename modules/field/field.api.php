@@ -873,7 +873,7 @@ function hook_field_widget_form(&$form, &$form_state, $field, $instance, $langco
     '#type' => $instance['widget']['type'],
     '#default_value' => isset($items[$delta]) ? $items[$delta] : '',
   );
-  return $element;
+  return array('value' => $element);
 }
 
 /**
@@ -1076,8 +1076,8 @@ function hook_field_formatter_info() {
  * Perform alterations on Field API formatter types.
  *
  * @param $info
- *   Array of informations on formatter types exposed by
- *   hook_field_field_formatter_info() implementations.
+ *   An array of information on formatter types exposed by
+ *   hook_field_formatter_info() implementations.
  */
 function hook_field_formatter_info_alter(&$info) {
   // Add a setting to a formatter type.
@@ -1735,11 +1735,14 @@ function hook_field_storage_details_alter(&$details, $field) {
  *     loaded.
  */
 function hook_field_storage_load($entity_type, $entities, $age, $fields, $options) {
-  $field_info = field_info_field_by_ids();
   $load_current = $age == FIELD_LOAD_CURRENT;
 
   foreach ($fields as $field_id => $ids) {
-    $field = $field_info[$field_id];
+    // By the time this hook runs, the relevant field definitions have been
+    // populated and cached in FieldInfo, so calling field_info_field_by_id()
+    // on each field individually is more efficient than loading all fields in
+    // memory upfront with field_info_field_by_ids().
+    $field = field_info_field_by_id($field_id);
     $field_name = $field['field_name'];
     $table = $load_current ? _field_sql_storage_tablename($field) : _field_sql_storage_revision_tablename($field);
 

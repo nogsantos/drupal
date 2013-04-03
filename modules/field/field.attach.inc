@@ -283,7 +283,6 @@ function _field_invoke_multiple($op, $entity_type, $entities, &$a = NULL, &$b = 
     'language' => NULL,
   );
   $options += $default_options;
-  $field_info = field_info_field_by_ids();
 
   $fields = array();
   $grouped_instances = array();
@@ -307,7 +306,7 @@ function _field_invoke_multiple($op, $entity_type, $entities, &$a = NULL, &$b = 
     foreach ($instances as $instance) {
       $field_id = $instance['field_id'];
       $field_name = $instance['field_name'];
-      $field = $field_info[$field_id];
+      $field = field_info_field_by_id($field_id);
       $function = $options['default'] ? 'field_default_' . $op : $field['module'] . '_field_' . $op;
       if (function_exists($function)) {
         // Add the field to the list of fields to invoke the hook on.
@@ -614,7 +613,6 @@ function field_attach_form($entity_type, $entity, &$form, &$form_state, $langcod
  *     non-deleted fields are operated on.
  */
 function field_attach_load($entity_type, $entities, $age = FIELD_LOAD_CURRENT, $options = array()) {
-  $field_info = field_info_field_by_ids();
   $load_current = $age == FIELD_LOAD_CURRENT;
 
   // Merge default options.
@@ -692,7 +690,7 @@ function field_attach_load($entity_type, $entities, $age = FIELD_LOAD_CURRENT, $
         }
         // Collect the storage backend if the field has not been loaded yet.
         if (!isset($skip_fields[$field_id])) {
-          $field = $field_info[$field_id];
+          $field = field_info_field_by_id($field_id);
           $storages[$field['storage']['type']][$field_id][] = $load_current ? $id : $vid;
         }
       }
@@ -709,7 +707,7 @@ function field_attach_load($entity_type, $entities, $age = FIELD_LOAD_CURRENT, $
     _field_invoke_multiple('load', $entity_type, $queried_entities, $age, $null, $options);
 
     // Invoke hook_field_attach_load(): let other modules act on loading the
-    // entitiy.
+    // entity.
     module_invoke_all('field_attach_load', $entity_type, $queried_entities, $age, $options);
 
     // Build cache data.
